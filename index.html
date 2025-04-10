@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لعبة أبو يحيى</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            border: 2px solid #0f0;
+            background-color: #222;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>لعبة أبو يحيى - النسخة الأولية</h1>
+    <canvas id="gameCanvas" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let abuYahya = { x: 50, y: 180, width: 40, height: 40, color: "#0f0", dx: 2 };
+
+        function drawAbuYahya() {
+            ctx.fillStyle = abuYahya.color;
+            ctx.fillRect(abuYahya.x, abuYahya.y, abuYahya.width, abuYahya.height);
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function updateGame() {
+            clearCanvas();
+            drawAbuYahya();
+            abuYahya.x += abuYahya.dx;
+            if (abuYahya.x + abuYahya.width > canvas.width || abuYahya.x < 0) {
+                abuYahya.dx *= -1;
+            }
+            requestAnimationFrame(updateGame);
+        }
+
+        updateGame();
+    </script>
+</body>
+</html>
